@@ -1,0 +1,119 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family:sans-serif;
+}
+.contenedor{
+    width: 65%;
+    padding: 40px 0;
+    margin: auto;
+}
+.contenedor-titulo{
+    margin-bottom: 15px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+h2{
+    margin-bottom: 8px;
+}
+.contenedor-clima-buscador{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 25px;
+}
+.contenedor-clima{
+    height: 130px;
+    min-width: 48%;
+    background-color: rgb(207, 214, 219);
+}
+.contenedor-buscador{
+    min-width: 48%;
+    display: flex;
+    justify-content: center;
+}
+.buscador{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.sele{
+    width: 300px;
+    height: 30px;
+    padding: 2px 5px;
+}
+.ciudad{
+    padding: 2px 5px;
+    height: 30px;
+}
+#btn_buscar{
+    padding: 5px 0px;
+}
+.clima{
+    display: flex;
+}
+.descrip{
+    padding: 10px;
+}
+.temperatura{
+    font-size: 60px;
+    padding: 10px 10px 10px 30px;
+}
+.max-min{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding-right: 30px;
+    padding-top: 20px;
+}
+.otros-dias{
+    padding-top: 60px;
+}
+.titulo-dias{
+    width: 100%;
+    height: 48px;
+    background-color: #F2F2F2;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding-left: 10px;
+}
+.titulo-dias p{
+    font-size: 20px;
+}
+.dias{
+    display: flex;
+    justify-content: space-between;
+    /* flex-wrap:wrap; */
+    overflow: scroll;
+    overflow-y: hidden;
+    margin-top: 20px;
+    padding-bottom: 10px;
+    gap: 5px;
+    
+}
+.dia{
+    min-width: 160px;
+    min-height: 30px;
+    display: flex;
+    flex-direction: column;
+    padding: 10px 0;
+    border:1px solid rgb(149, 169, 233);
+}
+.dia div{
+    text-align: center;
+}
+.max-min-2{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+}
+.hoy{
+    font-size: 18px;
+    font-weight: bold;
+    padding-bottom:5px;
+}
+.fecha{
+    font-size: 14px;
+}
