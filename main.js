@@ -5,7 +5,6 @@ function callApi(nomCiudad, codPais){
     fetch(url)
     .then(resp=>resp.json())
     .then(dataJson=>{
-        // console.log(dataJson)
         mostrarClima(dataJson);
     })
 }
@@ -18,7 +17,8 @@ function callApiDays(lat, lon){
     .then(data=>{
         console.log(data);
         mostrarClimaDays(data);
-    });
+    })
+
 }
 function mostrarClima(data){
     lon=data.coord.lon;
@@ -35,46 +35,52 @@ function mostrarClima(data){
 }
 function mostrarClimaDays(data){
     let arr=data.list;
-    
-    for(let i=0;i<5;i++){
-        let fecha=arr[i*8].dt_txt;
+    let diaAnterior = 0;
+    let n=0;
+    for(let i=0; i<arr.length; i++){
+        let fecha=arr[i].dt_txt;
         fecha=fecha.substring(0,10).split("-");
         let ano=fecha[0];
         let mes=fecha[1];
         let dia=fecha[2];
-        if(i==0){diaFecha(ano, mes, dia)}
-        fecha=laFecha(ano, mes, dia);
-        fecha=fecha.split("-");
-        let nomdDia=fecha[0];
-        let diaMes=fecha[1];
-        let arrW=arr[i].weather;
+        if(i==0)diaAnterior = dia;
         
-        
-        arrHoy[i].innerText=nomdDia;
-        arrFecha[i].innerText=diaMes;
-        arrImg[i].src=`https://openweathermap.org/img/wn/${arrW[0].icon}@2x.png`;
-        
-        arrMin[i].innerText=arr[i].main.temp_min+"°";
-        arrMax[i].innerText=arr[i].main.temp_max+"°";
+        if(dia != diaAnterior && n<4 ){
+            
+            fecha=laFecha(ano, mes, dia);
+            fecha=fecha.split("-");
+            let nomdDia=fecha[0];
+            // console.log(nomdDia);
+            let diaMes=fecha[1];
+            let arrW=arr[n].weather;
+            
+            arrHoy[n].innerText=nomdDia;
+            arrFecha[n].innerText=diaMes;
+            arrImg[n].src=`https://openweathermap.org/img/wn/${arrW[0].icon}@2x.png`;
+            
+            arrMin[n].innerText=arr[n].main.temp_min+"°";
+            arrMax[n].innerText=arr[n].main.temp_max+"°";
+
+            n++;
+        }
+        diaAnterior = dia;
     }
+ 
 }
 function laFecha(a, m, d){
+
     const calendario=new Date(a, m, d);
-    let strDia=dias[calendario.getDay()];
+    const calDia = new Date(month[calendario.getMonth()]+' '+d+', '+a);
+    let strDia=dias[calDia.getDay()];
     let strMes=meses[calendario.getMonth()];
     return strFecha=strDia+"-"+d+" "+strMes
 }
 function diaFecha(a, m, d){
     const calendario=new Date(a, m, d);
     let strDia="";
-    if(calendario.getDay()==0){
-        strDia=dias[6];
-    }
-    else{
-        strDia=dias[calendario.getDay()-1];
-    }
-    diaActual.innerText=strDia;
+    strDia=dias[calendario.getDay()];
 }
+
 let lon=0;
 let lat=0;
 
@@ -102,7 +108,6 @@ const dias={
     6:"Sabado"
 }
 const meses={
-    0:"Dic",
     1:"Ene",
     2:"Feb",
     3:"Mar",
@@ -113,7 +118,22 @@ const meses={
     8:"Ago",
     9:"Sep",
     10:"Oct",
-    11:"Nov"
+    11:"Nov",
+    0:"Dic"
+}
+const month={
+    1:"January",
+    2:"February",
+    3:"March",
+    4:"April",
+    5:"May",
+    6:"June",
+    7:"July",
+    8:"August",
+    9:"September",
+    10:"Octuber",
+    11:"November",
+    0:"December"
 }
 btn.addEventListener("click",function(e){
     e.preventDefault();
@@ -128,3 +148,6 @@ window.addEventListener("load",function(){
     callApi("bucaramanga", "CO");
     callApiDays(lat, lon);
 });
+
+let ahora = new Date();
+diaActual.innerText = dias[ahora.getDay()];
