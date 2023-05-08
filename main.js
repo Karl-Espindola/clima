@@ -1,6 +1,6 @@
 function callApi(nomCiudad, codPais){
     const key="785ba427781c6d943c0772420d614224";
-    const url=`http://api.openweathermap.org/data/2.5/weather?q=${nomCiudad},${codPais}&units=metric&appid=${key}`;
+    const url=`https://api.openweathermap.org/data/2.5/weather?q=${nomCiudad},${codPais}&units=metric&appid=${key}`;
 
     fetch(url)
     .then(resp=>resp.json())
@@ -10,7 +10,7 @@ function callApi(nomCiudad, codPais){
 }
 function callApiDays(lat, lon){
     const key="785ba427781c6d943c0772420d614224";
-    const url=`http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric&appid=${key}`;
+    const url=`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric&appid=${key}`;
 
     fetch(url)
     .then(res=>res.json())
